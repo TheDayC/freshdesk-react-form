@@ -4,6 +4,7 @@ import './scss/App.css';
 import $ from 'jquery';
 //import { Button, Row, Col, Input } from 'react-materialize';
 import Titles from './components/titles';
+import Input from './components/input';
 
 
 class App extends Component {
@@ -28,7 +29,7 @@ class App extends Component {
 
   handleSubmit(e){
     e.preventDefault();
-    console.log(this.refs.firstname.value);
+    
     var data = {
       "email": "david.connolly@kaplan.co.uk",
       "subject": "Test API connected enquiry",
@@ -44,7 +45,6 @@ class App extends Component {
                       }*/
     };
 
-    console.log(data);
     $.ajax({
       url: "https://dckaplan.freshdesk.com/api/v2/tickets",
       beforeSend: function (xhr) {
@@ -72,17 +72,17 @@ class App extends Component {
 
           <div className="App-intro">
           <form id="freshdesk" onSubmit={this.handleSubmit.bind(this)}>
-            <div className="form-row student">
-              <p>Are you currently a Kaplan student</p>
-              <p><input type="radio" name="student" value="Yes" ref="student" id="student1" /><label htmlFor="student1">Yes</label></p>
-              <p><input type="radio" name="student" value="No" ref="student" id="student2" /><label htmlFor="student2">No</label></p>
+            <div className="row student"><Input type="radio" name="student" radioValues={['Yes', 'No']} radioIDs={['student1', 'student2']}  /></div>
+            <div className="row title"><Titles addTitles={this.handleTitles.bind(this)} /></div>
+            <div className="row first-name"><Input type="text" name="first_name" placeholder="First Name" className="col s12" /></div>
+            <div className="row last-name"><Input type="text" name="last_name" placeholder="Last Name" className="col s12" /></div>
+            <div className="row email"><Input type="email" name="email" placeholder="Email" className="col s12" /></div>
+            <div className="row phone"><Input type="text" name="phone" placeholder="Phone" className="col s12" /></div>
+            <div className="row submit">
+              <div className="col s12">
+                <button type="submit" className="btn">Submit</button>
+              </div>
             </div>
-            <div className="title"><Titles addTitles={this.handleTitles.bind(this)} /></div>
-            <div className="row first-name"><input type="text" name="first_name" ref="firstname" placeholder="First Name" label="First Name" className="col s12" /></div>
-            <div className="row last-name"><input type="text" name="last_name" ref="lastname" placeholder="Last Name" label="Last Name" className="col s12" /></div>
-            <div className="row email"><input type="email" name="email" ref="email" placeholder="Email" label="Email" className="col s12" /></div>
-            <div className="row phone"><input type="text" name="phone" ref="phone" placeholder="Phone" label="Phone" className="col s12" /></div>
-            <div className="row submit"><div className="col s12"><button type="submit" className="btn">Submit</button></div></div>
           </form>
           </div>
         </div>
