@@ -48,7 +48,7 @@ class App extends Component {
     $.ajax({
       url: "https://dckaplan.freshdesk.com/api/v2/tickets",
       beforeSend: function (xhr) {
-          xhr.setRequestHeader("Authorization", "Basic " + btoa("ejTNMTBFNF0cCHKebLt:X"));
+          xhr.setRequestHeader("Authorization", "Basic " + btoa("API_KEY"));
       },
       type: 'POST',
       dataType: 'json',
